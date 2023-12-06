@@ -14,12 +14,21 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true, 
+  };
 
-app.use(cookieParser());
+  app.use(cors(corsOptions));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+app.use(cookieParser());
 
 app.use('/api/users',userRoutes);
 

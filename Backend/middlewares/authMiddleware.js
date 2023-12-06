@@ -4,8 +4,10 @@ import User from "../models/userModels.js";
 
 
 const userAuthentication= asyncHandler(async(req,res,next)=>{
+    
     let token;
-    token=req.cookies.jwt;
+    token=req.cookies.jwtuser;
+    console.log(token)
 
     if(token){
         try{
