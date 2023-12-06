@@ -1,10 +1,11 @@
+
+import React from "react";
 import { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from "./FormContainer";
-import {toast} from 'react-toastify';
+import {toast,ToastContainer} from 'react-toastify';
 import { useRegisterMutation } from "../apiSlice/apiSlice.js";
-
 
 const RegisterScreen = () => {
     const [name,setName] = useState('');
@@ -18,6 +19,7 @@ const RegisterScreen = () => {
     const submitHandler = async (e)=>{
         e.preventDefault();
         if(password !== confirmPassword){
+            console.log("not matched")
             toast.error('password do not match');
         }else{
             try{
@@ -81,7 +83,7 @@ const RegisterScreen = () => {
             <Button type="submit" variant="primary" className="mt-3 ">
                 Sign In
             </Button>
-
+            <ToastContainer />
             <Row className="py-3">
                 <Col>
                 Altready have an account? <Link  to='/login'>Login</Link> 
