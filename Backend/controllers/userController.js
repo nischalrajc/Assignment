@@ -42,6 +42,7 @@ const authUser=asyncHandler(async(req,res)=>{
     const {email,password}=req.body
 
     const user = await User.findOne({email})
+    
     if(user && (await user.matchPasswords(password))){
         generateToken(res,user._id);
         res.status(201).json({
@@ -59,7 +60,7 @@ const authUser=asyncHandler(async(req,res)=>{
 // -----------User Logout-----------
 
 const logoutUser = asyncHandler(async(req,res)=>{
-    console.log("logout");
+    
     res.cookie('jwt','',{
         httpOnly:true,
         expires:new Date(0),

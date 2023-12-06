@@ -28,6 +28,7 @@ const RegisterScreen = () => {
             toast.error('password do not match');
         }else{
             try{
+                console.log("here")
                 const res = await register({name,email,password}).unwrap();
                 dispatch(setCredentials({...res}))
                 navigate('/')
