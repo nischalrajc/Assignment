@@ -7,7 +7,6 @@ const userAuthentication= asyncHandler(async(req,res,next)=>{
     
     let token;
     token=req.cookies.jwtuser;
-    console.log(token)
 
     if(token){
         try{
