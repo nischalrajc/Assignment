@@ -6,6 +6,9 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from "./FormContainer";
 import {toast,ToastContainer} from 'react-toastify';
 import { useRegisterMutation } from "../apiSlice/apiSlice.js";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../apiSlice/authSlice.js";
+
 
 const RegisterScreen = () => {
     const [name,setName] = useState('');
@@ -14,7 +17,9 @@ const RegisterScreen = () => {
     const [confirmPassword,setconfirmPassword] = useState('');
 
     const navigate = useNavigate();
-    const register = useRegisterMutation();
+    const dispatch = useDispatch();
+
+    const [register] = useRegisterMutation();
 
     const submitHandler = async (e)=>{
         e.preventDefault();
@@ -24,6 +29,8 @@ const RegisterScreen = () => {
         }else{
             try{
                 const res = await register({name,email,password}).unwrap();
+                dispatch(setCredentials({...res}))
+                navigate('/')
                 if(res){
                     navigate('/')
                 }

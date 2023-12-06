@@ -5,8 +5,7 @@ import { generateToken } from "../utils/generateToken.js";
 // --------User Registration----------
 
 const registerUser=asyncHandler(async(req,res)=>{
-    console.log("user registration")
-    console.log(req.body);
+
     const {name,email,password}=req.body;
 
     const userExist = await User.findOne({ email });
@@ -39,7 +38,7 @@ const registerUser=asyncHandler(async(req,res)=>{
 // ---------User Authentication--------
 
 const authUser=asyncHandler(async(req,res)=>{
-
+    
     const {email,password}=req.body
 
     const user = await User.findOne({email})
@@ -60,6 +59,7 @@ const authUser=asyncHandler(async(req,res)=>{
 // -----------User Logout-----------
 
 const logoutUser = asyncHandler(async(req,res)=>{
+    console.log("logout");
     res.cookie('jwt','',{
         httpOnly:true,
         expires:new Date(0),
