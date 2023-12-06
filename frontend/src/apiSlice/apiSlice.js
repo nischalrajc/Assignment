@@ -6,16 +6,43 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
     endpoints: (builder) => ({
       register: builder.mutation({
-        query: (data) => ({
-          url: '/api/users',
-          method: 'POST',
-          body: data,
-        }),
+        query: (data) => {
+          return {
+            url: '/api/users',
+            method: 'POST',
+            body: data,
+          };
+        },
       }),
-      // Add other endpoints as needed
+      logout: builder.mutation({
+        query: () => {
+          return {
+            url: '/api/users/logout',
+            method: 'POST',
+          };
+        },
+      }),
+      login:builder.mutation({
+        query:(data)=>{
+          return{
+            url:'/api/users/auth',
+            method:'POST',
+            body:data,
+          }
+        }
+      }),
+      validateUser:builder.mutation({
+        query:()=>{
+          return{
+            url:'/api/users/validate',
+            method:'GET',
+          }
+        }
+      })
+      
     }),
   });
   
-  export const { useRegisterMutation } = api;
+  export const { useRegisterMutation,useLogoutMutation,useLoginMutation,useValidateUserMutation } = api;
   
   export default api;
